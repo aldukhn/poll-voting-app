@@ -21,6 +21,7 @@ import Header from "./Header";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../../redux/features/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const FormBuilder = () => {
   const initVal = formEl[0]?.value;
@@ -32,7 +33,7 @@ const FormBuilder = () => {
   const [formData, setFormData] = useState("text");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-
+  const navigate = useNavigate();
   const user = useSelector(selectUser);
 
   const items = data;
@@ -52,6 +53,7 @@ const FormBuilder = () => {
         "http://localhost:4000/createsurvey",
         payload
       );
+      navigate("/forms");
       console.log(response.data);
     } catch (error) {
       console.log(error);
